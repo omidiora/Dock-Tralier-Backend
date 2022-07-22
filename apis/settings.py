@@ -25,12 +25,7 @@ SECRET_KEY = 'django-insecure-8v83v&tyzvlv_(i1w7!j+v!zphd=2xk#t9+z_$pxgk#7+lls&#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-'*',
-"https://lit-escarpment-33979.herokuapp.com",
-'127.0.0.1',
-
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+    'rest_framework.authtoken',
     "kautus"
 ]
 
@@ -128,3 +124,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
