@@ -5,12 +5,33 @@ from .serializers import UserSerializer,RegisterSerializer
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import generics
+from rest_framework.authtoken.views import ObtainAuthToken
 
 from rest_framework.views import APIView
-
+from rest_framework import authentication, permissions
 from rest_framework import status
 from .serializers import DocksItemSerializer
 from .models import DocksItem
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = User.objects.all()
+        token, created = Token.objects.get(user=user)
+        print(created,'aa')
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+            "name":user.first_name
+        })
+
 
 
 # Class based view to Get User Details using Token Authentication
@@ -29,7 +50,11 @@ class RegisterUserAPIView(generics.CreateAPIView):
 
 
 
+
+
+
 class DocksItemViews(APIView):
+    
     def post(self, request):
         serializer = DocksItemSerializer(data=request.data)
         if serializer.is_valid():

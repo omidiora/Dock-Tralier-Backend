@@ -5,5 +5,16 @@ class DocksItem(models.Model):
     package_count = models.FloatField()
     countainer_count = models.FloatField()
     pause_count= models.FloatField()
+    empty_trailzer= models.CharField(max_length=200),
+    person_name=models.CharField(max_length=200)
+    email=models.CharField(max_length=200)
+    
+    
+class DocksItems(models.Model):
+    name = models.CharField(max_length=200)
+    package_count = models.FloatField()
+    countainer_count = models.FloatField()
+    pause_count= models.FloatField()
     empty_trailzer= models.CharField(max_length=200)
+
     
