@@ -55,7 +55,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
 
 
 class DocksItemViews(APIView):
-    
     def post(self, request):
         serializer = DocksItemSerializer(data=request.data)
         if serializer.is_valid():
