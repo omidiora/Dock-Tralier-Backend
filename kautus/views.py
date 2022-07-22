@@ -57,6 +57,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
 class DocksItemViews(APIView):
     def post(self, request):
         serializer = DocksItemSerializer(data=request.data)
+        print(serializer, '0900000000000000')
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
